@@ -12,12 +12,20 @@ git clone git@github.com:protobuf-c/protobuf-c-rpc.git
 ## Compiling
 
 ```
-gcc main.c gtfs-realtime.pb-c.c -lprotobuf-c -lcurl -o departures_iot
+make
 ```
+
+## Running
+
+```
+export DELIJN_API_KEY="--------------"
+./departures_iot
+```
+
 
 ## re-generating proto files
 
 gtfs_standard.proto is a standardized proto file, maintained by Google, which DeLijn uses.
 ```
-gcc main.c gtfs_standard.pb-c.c -lprotobuf-c -lcurl -o departures_iot
+protoc --c_out=. gtfs_standard.proto
 ```
