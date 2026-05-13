@@ -1,0 +1,109 @@
+https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785/real-time?maxAantalDoorkomsten=4
+
+HTTP/1.1 200 OK
+
+cache-control: no-cache="set-cookie, set-cookie2"
+content-language: nl-BE
+content-type: application/json;charset=UTF-8
+date: Tue, 12 May 2026 20:48:49 GMT
+expires: Thu, 01 Dec 1994 16:00:00 GMT
+server-timing: dtRpid;desc="394845176",dtTao;desc="1",dtSInfo;desc="0"
+timing-allow-origin: *
+x-oneagent-js-injection: true
+
+{
+    "halteDoorkomsten": [{
+        "haltenummer": "105785",
+        "doorkomsten": [{
+            "doorkomstId": "2026-05-12_1010_476_9_105785",
+            "entiteitnummer": "1",
+            "lijnnummer": 10,
+            "richting": "TERUG",
+            "ritnummer": "476",
+            "bestemming": "P+R Schoonselhof",
+            "plaatsBestemming": "P+R Schoonselhof",
+            "vias": [],
+            "bestemmingKort": "P+R Schoonselhof",
+            "dienstregelingTijdstip": "2026-05-12T23:00:00",
+            "real-timeTijdstip": "2026-05-12T23:00:00",
+            "vrtnum": "7431",
+            "predictionStatussen": ["REALTIME"],
+            "links": [{
+                "rel": "halte",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785"
+            }, {
+                "rel": "lijnrichting",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/lijnen/1/10/lijnrichtingen/TERUG"
+            }]
+        }, {
+            "doorkomstId": "2026-05-12_1402_289_41_105785",
+            "entiteitnummer": "1",
+            "lijnnummer": 402,
+            "richting": "TERUG",
+            "ritnummer": "289",
+            "bestemming": "Antwerpen F. Rooseveltplaats",
+            "plaatsBestemming": "Antwerpen F. Rooseveltplaats",
+            "vias": ["via Wijnegem"],
+            "bestemmingKort": "Antwerpen",
+            "dienstregelingTijdstip": "2026-05-12T23:10:00",
+            "real-timeTijdstip": "2026-05-12T23:08:30",
+            "vrtnum": "2496",
+            "predictionStatussen": ["REALTIME"],
+            "links": [{
+                "rel": "halte",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785"
+            }, {
+                "rel": "lijnrichting",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/lijnen/1/402/lijnrichtingen/TERUG"
+            }]
+        }, {
+            "doorkomstId": "2026-05-12_1010_480_9_105785",
+            "entiteitnummer": "1",
+            "lijnnummer": 10,
+            "richting": "TERUG",
+            "ritnummer": "480",
+            "bestemming": "P+R Schoonselhof",
+            "plaatsBestemming": "P+R Schoonselhof",
+            "vias": [],
+            "bestemmingKort": "P+R Schoonselhof",
+            "dienstregelingTijdstip": "2026-05-12T23:20:00",
+            "predictionStatussen": ["GESCHRAPT", "GEENREALTIME"],
+            "links": [{
+                "rel": "halte",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785"
+            }, {
+                "rel": "lijnrichting",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/lijnen/1/10/lijnrichtingen/TERUG"
+            }],
+            "status": "CANCELLED"
+        }, {
+            "doorkomstId": "2026-05-12_1402_293_41_105785",
+            "entiteitnummer": "1",
+            "lijnnummer": 402,
+            "richting": "TERUG",
+            "ritnummer": "293",
+            "bestemming": "Antwerpen F. Rooseveltplaats",
+            "plaatsBestemming": "Antwerpen F. Rooseveltplaats",
+            "vias": ["via Wijnegem"],
+            "bestemmingKort": "Antwerpen",
+            "dienstregelingTijdstip": "2026-05-12T23:40:00",
+            "real-timeTijdstip": "2026-05-12T23:40:00",
+            "vrtnum": "2844",
+            "predictionStatussen": ["REALTIME"],
+            "links": [{
+                "rel": "halte",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785"
+            }, {
+                "rel": "lijnrichting",
+                "url": "https://api.delijn.be/DLKernOpenData/api/v1/lijnen/1/402/lijnrichtingen/TERUG"
+            }]
+        }]
+    }],
+    "links": [{
+        "rel": "self",
+        "url": "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/105785/real-time?maxAantalDoorkomsten=4"
+    }],
+    "doorkomstNotas": [],
+    "ritNotas": [],
+    "omleidingen": []
+}

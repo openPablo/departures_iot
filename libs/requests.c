@@ -1,6 +1,5 @@
 #include <curl/curl.h>
 #include <curl/header.h>
-#include <curl/typecheck-gcc.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -37,6 +36,5 @@ long get(CURL *curl, char *url, struct memory *payload, char *header) {
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)payload);
   curl_easy_perform(curl);
   curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-  printf("GET %ld\n", http_code);
   return http_code;
 }
