@@ -62,7 +62,7 @@ void quicksort() {}
 int main() {
   char *haltes[] = {
       "101680", // Clara snellings
-      "172515"  // venneborglaan
+      "105785"  // venneborglaan
   };
   int haltes_length = 2;
   int requested_trams = 5;
