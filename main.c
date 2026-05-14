@@ -6,9 +6,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <time.h>
-
+#include <unistd.h>
 // Get haltes from delijn here:
 // https://data.delijn.be/api-details#api=KernOpenDataServicesV1&operation=get-haltes-indebuurt-latlng
 
@@ -57,20 +56,52 @@ void parse_tram_json(struct memory *payload, struct traminfo trams[10],
     free(tijd);
   }
 }
-// ToDo: implement quicksort
-void quicksort() {}
+void swap(struct traminfo *trams, int i, int k) {
+  struct traminfo tmp = trams[i];
+  trams[i] = trams[k];
+  trams[k] = tmp;
+}
+
+int partition(struct traminfo *trams, int low, int high) {
+  int pivot = trams[high].minuten_arrival;
+  int i = low - 1;
+  for (int j = low; j < high; j++) {
+    if (trams[j].minuten_arrival < pivot) {
+      i++;
+      swap(trams, i, j);
+    }
+  }
+  swap(trams, i + 1, high);
+  return i + 1;
+}
+void quick_sort(struct traminfo *trams, int low, int high) {
+  if (low < high) {
+    int partition_indx = partition(trams, low, high);
+
+    quick_sort(trams, low, partition_indx - 1);
+    quick_sort(trams, partition_indx + 1, high);
+  }
+}
+void display_trams(struct traminfo *trams, int found_trams) {
+  for (int i = 0; i < found_trams; i++) {
+    printf("%d %s: %d minuten \n", trams[i].lijnnummer, trams[i].bestemmingKort,
+           trams[i].minuten_arrival);
+  }
+}
 int main() {
   char *haltes[] = {
       "101680", // Clara snellings
       "105785"  // venneborglaan
   };
   int haltes_length = 2;
+  int found_trams = 0;
   int requested_trams = 5;
-  int http_res, found_trams = 0;
+  char (*urls)[255] = malloc(haltes_length * 255 * sizeof(char));
+  char header[255];
   struct memory *payload;
-  char header[255], url[255];
   struct traminfo *trams =
       malloc(haltes_length * requested_trams * sizeof(struct traminfo));
+
   CURL *curl = curl_easy_init();
   if (getenv("DELIJN_API_KEY") == NULL) {
     printf("Missing DELIJN_API_KEY environment variable.\n");
@@ -82,23 +113,25 @@ int main() {
     fprintf(stderr, "curl_easy_init() failed\n");
     exit(EXIT_FAILURE);
   }
-
   for (int k = 0; k < haltes_length; k++) {
-    payload = calloc(1, 17000);
-    snprintf(url, sizeof(url),
+    snprintf(urls[k], 255,
              "https://api.delijn.be/DLKernOpenData/api/v1/haltes/1/%s/"
              "real-time?maxAantalDoorkomsten=%d",
              haltes[k], requested_trams);
-    http_res = get(curl, url, payload, header);
-    if (http_res != 200) {
-      printf("%s\n", payload->response);
-    } else {
-      parse_tram_json(payload, trams, &found_trams);
-    }
   }
-  for (int i = 0; i < found_trams; i++) {
-    printf("%d %s: %d minuten \n", trams[i].lijnnummer, trams[i].bestemmingKort,
-           trams[i].minuten_arrival);
+  for (;;) {
+    for (int k = 0; k < haltes_length; k++) {
+      payload = calloc(1, 17000);
+      if (get(curl, urls[k], payload, header) != 200) {
+        printf("%s\n", payload->response);
+      } else {
+        parse_tram_json(payload, trams, &found_trams);
+      }
+    }
+    quick_sort(trams, 0, found_trams - 1);
+    display_trams(trams, found_trams);
+    found_trams = 0;
+    sleep(5);
   }
   curl_easy_cleanup(curl);
   free(payload);
