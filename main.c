@@ -91,12 +91,12 @@ int main() {
       "101680", // Clara snellings
       "105785"  // venneborglaan
   };
-  int haltes_length = 2;
   int found_trams = 0;
+  int haltes_length = 2;
   int requested_trams = 5;
   char (*urls)[255] = malloc(haltes_length * 255 * sizeof(char));
   char header[255];
-  struct memory *payload;
+  struct memory *payload = malloc(17000);
   struct traminfo *trams =
       malloc(haltes_length * requested_trams * sizeof(struct traminfo));
 
@@ -119,7 +119,7 @@ int main() {
   }
   for (;;) {
     for (int k = 0; k < haltes_length; k++) {
-      payload = calloc(1, 17000);
+      *payload = (const struct memory){0};
       if (get(curl, urls[k], payload, header) != 200) {
         printf("%s\n", payload->response);
       } else {
