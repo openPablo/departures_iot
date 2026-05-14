@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-// Get haltes from delijn here:
-// https://data.delijn.be/api-details#api=KernOpenDataServicesV1&operation=get-haltes-indebuurt-latlng
 
 struct traminfo {
   char bestemmingKort[30];
